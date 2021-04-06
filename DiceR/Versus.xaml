@@ -7,8 +7,173 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Page.Resources>
+        <Style TargetType="TextBlock" x:Key="SideText">
+            <Setter Property="FontFamily" Value="Segoe UI"/>
+            <Setter Property="FontSize" Value="25"/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Foreground" Value="Black"/>
+        </Style>
+        <Style TargetType="Button" x:Key="MemoryButton">
+            <Setter Property="FontFamily" Value="Segoe UI"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="FontSize" Value="10"/>
+            <Setter Property="Background" Value="Red"/>
+            <Setter Property="Width" Value="100"/>
+            <Setter Property="Foreground" Value="white"/>
+            <Setter Property="Margin" Value="50 0 0 0"/>
+        </Style>
+        <Style TargetType="Button">
+            <Setter Property="FontFamily" Value="Segoe UI"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="Background" Value="Red"/>
+            <Setter Property="Width" Value="70"/>
+            <Setter Property="Foreground" Value="white"/>
+            <Setter Property="Margin" Value="5"/>
+        </Style>
 
+        <Style TargetType="TextBox">
+            <Setter Property="FontFamily" Value="Segoe UI"/>
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="Background" Value="White"/>
+        </Style>
+        <Style TargetType="TextBlock">
+            <Setter Property="FontFamily" Value="Segoe UI"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="FontSize" Value="40"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="Margin" Value="15"/>
+        </Style>
+        <Style TargetType="CheckBox">
+            <Setter Property="FontFamily" Value="Segoe UI"/>
+            <Setter Property="FontSize" Value="12"/>
+        </Style>
+    </Page.Resources>
     <Grid>
-        <TextBlock Name ="DemoDie" TextAlignment="Center" FontSize="100"></TextBlock>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="3*"/>
+            <RowDefinition Height="5*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="3*"/>
+        </Grid.ColumnDefinitions>
+        <Border Grid.Row ="0" Grid.Column="9" Grid.RowSpan="4" Background="Azure"/>
+        <Border Grid.Row ="0" Grid.Column="0" Grid.RowSpan="4" Background="Azure"/>
+        <StackPanel
+            x:Name="right"
+            Grid.Column="9" 
+            Grid.RowSpan="4" 
+            Grid.Row="0" 
+            Orientation="Vertical" 
+            VerticalAlignment="Center">
+
+            <TextBlock Text="Add Dice"></TextBlock>
+            <StackPanel>
+                <StackPanel Orientation="Horizontal" >
+                    <Button Content="D4" Click="addDice" x:Name="RD4"></Button>
+                    <Button Content="D6" Click="addDice" x:Name="RD6"></Button>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" >
+                    <Button Content="D8" Click="addDice" x:Name="RD8"></Button>
+                    <Button Content="D10" Click="addDice" x:Name="RD10"></Button>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" >
+                    <Button Content="D12" Click="addDice" x:Name="RD12"></Button>
+                    <Button Content="D20" Click="addDice" x:Name="RD20"></Button>
+                </StackPanel>
+                
+            </StackPanel>
+            
+            <TextBlock Text="Modfiy" Style="{StaticResource SideText}"></TextBlock>
+            <TextBox x:Name="RightMod"></TextBox>
+            <Button Content="Clear" Click="Clear" x:Name="RightClear"></Button>
+        </StackPanel>
+        <StackPanel
+            Grid.Column="3" 
+            Grid.Row="1">
+        <TextBlock
+            Text="Right">
+        </TextBlock>
+        <TextBlock
+            x:Name="Right">
+        </TextBlock>
+        </StackPanel>
+        <Button 
+            Grid.Column="2" 
+            Grid.Row="1"
+            Content="Roll" 
+            Click="rollAll">
+        </Button>
+        <StackPanel
+            Grid.Column="1" 
+            Grid.Row="1">
+            <TextBlock
+                Text="Left">
+            </TextBlock>
+            <TextBlock
+                x:Name="Left">
+            </TextBlock>
+        </StackPanel>
+        <StackPanel
+            x:Name="left"
+            Grid.Column="0" 
+            Grid.RowSpan="4" 
+            Grid.Row="0" 
+            Orientation="Vertical" 
+            VerticalAlignment="Center">
+
+            <TextBlock Text="Add Dice"></TextBlock>
+            <StackPanel>
+                <StackPanel Orientation="Horizontal" >
+                    <Button Content="D4" Click="addDice" x:Name="LD4"></Button>
+                    <Button Content="D6" Click="addDice" x:Name="LD6"></Button>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" >
+                    <Button Content="D8" Click="addDice" x:Name="LD8"></Button>
+                    <Button Content="D10" Click="addDice" x:Name="LD10"></Button>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" >
+                    <Button Content="D12" Click="addDice" x:Name="LD12"></Button>
+                    <Button Content="D20" Click="addDice" x:Name="LD20"></Button>
+                </StackPanel>
+            </StackPanel>
+            <TextBlock Text="Modfiy" Style="{StaticResource SideText}"></TextBlock>
+            <TextBox x:Name="LeftMod"></TextBox>
+            <Button Content="Clear" Click="Clear" x:Name="LeftClear"></Button>
+
+        </StackPanel>
+        <StackPanel
+            Grid.Column="1" 
+            Grid.RowSpan="2" 
+            Grid.Row="2" 
+            Orientation="Vertical" 
+            VerticalAlignment="Center">
+            <TextBlock x:Name="result1"></TextBlock>
+            <TextBlock x:Name="result2"></TextBlock>
+            <TextBlock x:Name="result3"></TextBlock>
+            <TextBlock x:Name="result4"></TextBlock>
+            <TextBlock x:Name="result5"></TextBlock>
+        </StackPanel>
+        <StackPanel
+            Grid.Column="3" 
+            Grid.RowSpan="2" 
+            Grid.Row="2"
+            Orientation="Vertical" 
+            VerticalAlignment="Center">
+            <TextBlock x:Name="result6"></TextBlock>
+            <TextBlock x:Name="result7"></TextBlock>
+            <TextBlock x:Name="result8"></TextBlock>
+            <TextBlock x:Name="result9"></TextBlock>
+            <TextBlock x:Name="result10"></TextBlock>
+        </StackPanel>
     </Grid>
 </Page>

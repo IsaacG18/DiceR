@@ -6,39 +6,31 @@ using System.Threading.Tasks;
 
 namespace DiceR.common
 {
-    public class dice
+    public class dice : Type
     {
-        private int maxNum;
-        private int roll;
+
+
+        private int modifyNum;
         Random rand = new Random();
+        public dice(int num, int mod)
+        {
+            maxNum = num + 1;
+            modify(mod);
+        }
         public dice(int num)
         {
             maxNum = num + 1;
+            modify(0);
         }
-        public int modify(int mod, bool add)
+        public int modify(int mod)
         {
-            if (add == true)
-            {
-                roll += mod;
-            }
-            else
-            {
-                roll -= mod;
-            }
-            return roll;
+            modifyNum = mod;
+            return modifyNum;
         }
         public int rollDice()
         {
-            roll = rand.Next(1, maxNum);
-            return getRoll();
-        }
-        public int getRoll()
-        {
-            return roll;
-        }
-        public int getSize()
-        {
-            return maxNum;
+            number = rand.Next(1, maxNum) + modifyNum;
+            return getNumber();
         }
     }
 }

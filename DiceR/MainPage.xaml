@@ -27,6 +27,7 @@
                          ItemInvoked="NavView_ItemInvoked"
                          BackRequested="NavView_BackRequested"
                         Grid.Column="0"
+                        Grid.ColumnSpan="3"
                         Grid.Row="0"
                         Grid.RowSpan="4">
             <NavigationView.MenuItems>
@@ -35,7 +36,12 @@
                 <NavigationViewItemHeader x:Name="MainPagesHeader"
                                           Content="Main pages"/>
 
-                <NavigationViewItem Tag="solo" Content="Solo">
+                <NavigationViewItem Tag="Solo" Content="Solo">
+                    <NavigationViewItem.Icon>
+                        <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE77B;"/>
+                    </NavigationViewItem.Icon>
+                </NavigationViewItem>
+                <NavigationViewItem Tag="Ticker" Content="Ticker">
                     <NavigationViewItem.Icon>
                         <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE77B;"/>
                     </NavigationViewItem.Icon>
@@ -46,21 +52,6 @@
                        NavigationFailed="ContentFrame_NavigationFailed" Navigated="ContentFrame_Navigated"/>
             </ScrollViewer>
         </NavigationView>
-        <VisualStateManager.VisualStateGroups>
-            <VisualStateGroup>
-                <VisualState>
-                    <VisualState.StateTriggers>
-                        <AdaptiveTrigger
-                            MinWindowWidth="{x:Bind NavView.CompactModeThresholdWidth}"/>
-                    </VisualState.StateTriggers>
-                    <VisualState.Setters>
-                        <Setter Target="NavView.PaneDisplayMode" Value="Top"/>
-                        <Setter Target="NavView.SearchBox.Width" Value="100%"/>
-                        <Setter Target="MainPagesHeader.Visibility" Value="Collapsed"/>
-                        <Setter Target="ContentFrame.Padding" Value="24,0,24,24"/>
-                    </VisualState.Setters>
-                </VisualState>
-            </VisualStateGroup>
-        </VisualStateManager.VisualStateGroups>
+        
     </Grid>
 </Page>

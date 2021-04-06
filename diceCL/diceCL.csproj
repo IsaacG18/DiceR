@@ -123,6 +123,10 @@
     <Compile Include="Class1.cs" />
     <Compile Include="common\dice.cs" />
     <Compile Include="common\DiceSet.cs" />
+    <Compile Include="common\Set.cs" />
+    <Compile Include="common\Ticker.cs" />
+    <Compile Include="common\TickerSet.cs" />
+    <Compile Include="common\Type.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Properties\diceCL.rd.xml" />
   </ItemGroup>

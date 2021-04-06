@@ -30,8 +30,9 @@ namespace DiceR
         }
         private readonly List<(string Tag, Type Page)> _pages = new List<(string Tag, Type Page)>
         {
-            ("home", typeof(Home)),
-            ("solo", typeof(Solo)),
+            ("Home", typeof(Home)),
+            ("Solo", typeof(Solo)),
+            ("Ticker", typeof(Ticker)),
 
         };
 
@@ -55,7 +56,7 @@ namespace DiceR
             // If navigation occurs on SelectionChanged, this isn't needed.
             // Because we use ItemInvoked to navigate, we need to call Navigate
             // here to load the home page.
-            NavView_Navigate("home", new EntranceNavigationTransitionInfo());
+            NavView_Navigate("Home", new EntranceNavigationTransitionInfo());
 
             // Add keyboard accelerators for backwards navigation.
             var goBack = new KeyboardAccelerator { Key = VirtualKey.GoBack };
@@ -77,7 +78,7 @@ namespace DiceR
         {
             if (args.IsSettingsInvoked == true)
             {
-                NavView_Navigate("solo", args.RecommendedNavigationTransitionInfo);
+                NavView_Navigate("Solo", args.RecommendedNavigationTransitionInfo);
             }
             else if (args.InvokedItemContainer != null)
             {
@@ -94,7 +95,7 @@ namespace DiceR
         {
             if (args.IsSettingsSelected == true)
             {
-                NavView_Navigate("solo", args.RecommendedNavigationTransitionInfo);
+                NavView_Navigate("Solo", args.RecommendedNavigationTransitionInfo);
             }
             else if (args.SelectedItemContainer != null)
             {
