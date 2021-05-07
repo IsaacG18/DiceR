@@ -4,11 +4,16 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:DiceR"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:extensions="using:Microsoft.Toolkit.Uwp.UI.Extensions"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
     <Page.Resources>
+        <Style TargetType="TextBlock" x:Key="num">
+            <Setter Property="FontFamily" Value="Segoe UI"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="Foreground" Value="Black"/>
+        </Style>
         <Style TargetType="TextBlock" x:Key="SideText">
             <Setter Property="FontFamily" Value="Segoe UI"/>
             <Setter Property="FontSize" Value="15"/>
@@ -54,14 +59,56 @@
         </Style>
     </Page.Resources>
     <Grid>
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup>
+                <VisualState x:Name="Narrow">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="0"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="addDelBut.Orientation" Value ="Vertical"/>
+                        <Setter Target="SavedSlot1.Orientation" Value ="Vertical"/>
+                        <Setter Target="SavedSlot2.Orientation" Value ="Vertical"/>
+                        <Setter Target="SavedSlot3.Orientation" Value ="Vertical"/>
+                        <Setter Target="SavedSlot4.Orientation" Value ="Vertical"/>
+                        <Setter Target="SavedSlot5.Orientation" Value ="Vertical"/>
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="compact">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="600"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="addDelBut.Orientation" Value ="Vertical"/>
+                        <Setter Target="SavedSlot1.Orientation" Value ="Vertical"/>
+                        <Setter Target="SavedSlot2.Orientation" Value ="Vertical"/>
+                        <Setter Target="SavedSlot3.Orientation" Value ="Vertical"/>
+                        <Setter Target="SavedSlot4.Orientation" Value ="Vertical"/>
+                        <Setter Target="SavedSlot5.Orientation" Value ="Vertical"/>
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="wide">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="1200"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="addDelBut.Orientation" Value ="Horizontal"/>
+                        <Setter Target="SavedSlot1.Orientation" Value ="Horizontal"/>
+                        <Setter Target="SavedSlot2.Orientation" Value ="Horizontal"/>
+                        <Setter Target="SavedSlot3.Orientation" Value ="Horizontal"/>
+                        <Setter Target="SavedSlot4.Orientation" Value ="Horizontal"/>
+                        <Setter Target="SavedSlot5.Orientation" Value ="Horizontal"/>
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
         <Grid.RowDefinitions>
-            <RowDefinition Height="1*"/>
+            <RowDefinition Height="2*"/>
             <RowDefinition Height="3*"/>
             <RowDefinition Height="5*"/>
-            <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="2*"/>
+
             <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="1*"/>
@@ -78,14 +125,18 @@
             Grid.Row="0" 
             Orientation="Vertical" 
             VerticalAlignment="Center">
-
+            
+            <TextBlock Text="Name of Player" Style="{StaticResource SideText}"></TextBlock>
+            <TextBox x:Name="playerName"></TextBox>
+            <Button Content="Add Player" Click="addPlayer"></Button>
+            
             <TextBlock Text="Name of Set" Style="{StaticResource SideText}"></TextBlock>
             <TextBox x:Name="setName"></TextBox>
 
             <TextBlock Text="Dice Count" Style="{StaticResource SideText}"></TextBlock>
             <TextBox x:Name="diceAmount"></TextBox>
 
-            <StackPanel Orientation="Horizontal" >
+            <StackPanel x:Name="addDelBut" >
                 <Button Content="Add Set" Click="addSet"></Button>
                 <Button Content="Delete Set" Click="deleteSet"></Button>
             </StackPanel>
@@ -93,13 +144,14 @@
             <TextBlock Text="Number" Style="{StaticResource SideText}"></TextBlock>
             <TextBox x:Name="dicRoll"></TextBox>
 
-            <TextBlock Text="Modfiy" Style="{StaticResource SideText}"></TextBlock>
+            <TextBlock Text="Modify" Style="{StaticResource SideText}"></TextBlock>
             <TextBox x:Name="modRoll"></TextBox>
 
             <CheckBox x:Name="subtract" Content="Subtract" Margin="10"/>
 
-            <TextBlock Text="Amount" Style="{StaticResource SideText}"></TextBlock>
-            <TextBox x:Name="amountRoll"></TextBox>
+            <TextBlock Text="Amount" Style="{StaticResource SideText}"
+                      ></TextBlock>
+            <TextBox x:Name="amountRoll"/>
 
             <Button Content="Add" Click="Add"></Button>
 
@@ -108,68 +160,83 @@
 
             <Button Content="Delete" Click="Delete"></Button>
 
-            <TextBlock Text="Listbox" Style="{StaticResource SideText}"></TextBlock>
+            <TextBlock Text="Saved Sets" Style="{StaticResource SideText}"></TextBlock>
             <ListBox>
-                <StackPanel Orientation="Horizontal">
+                <StackPanel x:Name="SavedSlot1">
                     <TextBlock x:Name="memory1" Text="Empty Slot" Style="{StaticResource SideText}"></TextBlock>
-                    <Button Content="Select" Click="Select1" Style="{StaticResource MemoryButton}"></Button>
+                    <Button x:Name="slot1" Content="Select" Click="Select1" Style="{StaticResource MemoryButton}"></Button>
                 </StackPanel>
-                <StackPanel Orientation="Horizontal">
+                <StackPanel x:Name="SavedSlot2">
                     <TextBlock x:Name="memory2" Text="Empty Slot" Style="{StaticResource SideText}"></TextBlock>
-                    <Button Content="Select" Click="Select2" Style="{StaticResource MemoryButton}"/>
+                    <Button x:Name="slot2" Content="Select" Click="Select2" Style="{StaticResource MemoryButton}"/>
                 </StackPanel>
-                <StackPanel Orientation="Horizontal">
+                <StackPanel x:Name="SavedSlot3">
                     <TextBlock x:Name="memory3" Text="Empty Slot" Style="{StaticResource SideText}"></TextBlock>
-                    <Button Content="Select" Click="Select3" Style="{StaticResource MemoryButton}"></Button>
+                    <Button x:Name="slot3" Content="Select" Click="Select3" Style="{StaticResource MemoryButton}"></Button>
                 </StackPanel>
-                <StackPanel Orientation="Horizontal">
+                <StackPanel x:Name="SavedSlot4">
                     <TextBlock x:Name="memory4" Text="Empty Slot" Style="{StaticResource SideText}"></TextBlock>
-                    <Button Content="Select" Click="Select4" Style="{StaticResource MemoryButton}"></Button>
+                    <Button x:Name="slot4" Content="Select" Click="Select4" Style="{StaticResource MemoryButton}"></Button>
                 </StackPanel>
-                <StackPanel Orientation="Horizontal">
+                <StackPanel x:Name="SavedSlot5">
                     <TextBlock x:Name="memory5" Text="Empty Slot" Style="{StaticResource SideText}"></TextBlock>
-                    <Button Content="Select" Click="Select5" Style="{StaticResource MemoryButton}"></Button>
+                    <Button x:Name="slot5" Content="Select" Click="Select5" Style="{StaticResource MemoryButton}"></Button>
                 </StackPanel>
             </ListBox>
 
-            <Button Content="Roll" Click="Roll"></Button>
+            
 
         </StackPanel>
         <StackPanel
-            Grid.Column="1" 
+            Grid.Column="0" 
+            Grid.ColumnSpan="2" 
             Grid.RowSpan="4" 
-            Grid.Row="1" 
+            Grid.Row="0" 
             Orientation="Vertical" 
             VerticalAlignment="Center">
-            <TextBlock x:Name="result1"></TextBlock>
-            <TextBlock x:Name="result2"></TextBlock>
-            <TextBlock x:Name="result3"></TextBlock>
-            <TextBlock x:Name="result4"></TextBlock>
-            <TextBlock x:Name="result5"></TextBlock>
+            <TextBlock PointerEntered="GetType" PointerExited="clearDiceResult" x:Name="result1"></TextBlock>
+            <TextBlock PointerEntered="GetType" PointerExited="clearDiceResult" x:Name="result2"></TextBlock>
+            <TextBlock PointerEntered="GetType" PointerExited="clearDiceResult" x:Name="result3"></TextBlock>
+            <TextBlock PointerEntered="GetType" PointerExited="clearDiceResult" x:Name="result4"></TextBlock>
+            <TextBlock PointerEntered="GetType" PointerExited="clearDiceResult" x:Name="result5"></TextBlock>
         </StackPanel>
         <StackPanel
-            Grid.Column="3" 
+            Grid.Column="2" 
+            Grid.ColumnSpan="2" 
             Grid.RowSpan="4" 
-            Grid.Row="1" 
+            Grid.Row="0" 
             Orientation="Vertical" 
             VerticalAlignment="Center">
-            <TextBlock x:Name="result6"></TextBlock>
-            <TextBlock x:Name="result7"></TextBlock>
-            <TextBlock x:Name="result8"></TextBlock>
-            <TextBlock x:Name="result9"></TextBlock>
-            <TextBlock x:Name="result10"></TextBlock>
+            <Button Content="Roll" Click="Roll"></Button>
+            <TextBlock PointerEntered="GetType" PointerExited="clearDiceResult" x:Name="result6"></TextBlock>
+            <TextBlock PointerEntered="GetType" PointerExited="clearDiceResult" x:Name="result7"></TextBlock>
+            <TextBlock PointerEntered="GetType" PointerExited="clearDiceResult" x:Name="result8"></TextBlock>
+            <TextBlock PointerEntered="GetType" PointerExited="clearDiceResult" x:Name="result9"></TextBlock>
+            <TextBlock PointerEntered="GetType" PointerExited="clearDiceResult" x:Name="result10"></TextBlock>
+            <TextBlock x:Name="resultDice" Style="{StaticResource num}"></TextBlock>
         </StackPanel>
         <StackPanel
-            Grid.Column="5" 
+            Grid.Column="4" 
+            Grid.ColumnSpan="2" 
             Grid.RowSpan="4" 
-            Grid.Row="1" 
+            Grid.Row="0" 
             Orientation="Vertical" 
             VerticalAlignment="Center">
-            <TextBlock x:Name="result11"></TextBlock>
-            <TextBlock x:Name="result12"></TextBlock>
-            <TextBlock x:Name="result13"></TextBlock>
-            <TextBlock x:Name="result14"></TextBlock>
-            <TextBlock x:Name="result15"></TextBlock>
+            <TextBlock PointerEntered="GetType" PointerExited="clearDiceResult" x:Name="result11"></TextBlock>
+            <TextBlock PointerEntered="GetType" PointerExited="clearDiceResult" x:Name="result12"></TextBlock>
+            <TextBlock PointerEntered="GetType" PointerExited="clearDiceResult" x:Name="result13"></TextBlock>
+            <TextBlock PointerEntered="GetType" PointerExited="clearDiceResult" x:Name="result14"></TextBlock>
+            <TextBlock PointerEntered="GetType" PointerExited="clearDiceResult" x:Name="result15"></TextBlock>
+        </StackPanel>
+        <StackPanel
+            Grid.Column="0" 
+            Grid.ColumnSpan="6" 
+            Grid.RowSpan="1" 
+            Grid.Row="0" 
+            Orientation="Horizontal" 
+            VerticalAlignment="Center">
+            <TextBlock x:Name="Player"></TextBlock>
+            <TextBlock x:Name="error"  Style="{StaticResource num}"></TextBlock>
         </StackPanel>
     </Grid>
 </Page>

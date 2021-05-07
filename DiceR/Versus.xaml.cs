@@ -33,28 +33,30 @@ namespace DiceR
         private void addDice(object sender, RoutedEventArgs e)
         {
             int i = 0;
-            int[] diceNum = { 4, 6, 8, 10, 12, 20 };
-            Button[] addLeftDice = { LD4, LD6, LD8, LD10, LD12, LD20 }; 
-            Button[] addRightDice = { RD4, RD6, RD8, RD10, RD12, RD20 };
-            foreach (Button b in addRightDice)
+            int[] diceNum = { 4, 6, 8, 10, 12, 20 };//Array of interagers that represet the values of the dice rolls
+            Button[] addLeftDice = { LD4, LD6, LD8, LD10, LD12, LD20 }; //Array of button that represet the left sides dice adding
+            Button[] addRightDice = { RD4, RD6, RD8, RD10, RD12, RD20 };//Array of button that represet the rights sides dice adding
+
+            foreach (Button b in addRightDice)//For each button in addRightDice
             {
-                if (sender == b)
+                if (sender == b)//If button and sender match
                 {
                     dice d = new dice(diceNum[i]);
-                    rDS.addDice(d);
+                    rDS.addDice(d);//Adds a new dice to right dice set
                 }
                 i++;
             }
             i = 0;
-            foreach (Button b in addLeftDice)
+            foreach (Button b in addLeftDice)//For each button in addLeftDice
             {
-                if (sender == b)
+                if (sender == b)//If button and sender match
                 {
                     dice d = new dice(diceNum[i]);
-                    lDS.addDice(d);
+                    lDS.addDice(d);//Adds a new dice to right dice set
                 }
                 i++;
             }
+            errorMessage("");
         }
 
         private void rollAll(object sender, RoutedEventArgs e)
@@ -62,81 +64,112 @@ namespace DiceR
             int modRight = 0;
             try
             {
-                modRight = Int32.Parse(RightMod.Text);
+                modRight = Int32.Parse(RightMod.Text);//Try to convert string to int for modify right
             }
             catch
             {
-                modRight = 0;
+                if(RightMod.Text.Trim() == "")
+                {
+                    modRight = 0;
+                }
+                else
+                {
+                    errorMessage("Right Modify to delete an is illegal input");
+                    return;
+                }
+                
+            }
+            if (modRight < 0)
+            {
+                errorMessage("Right Modify is less than or equal to 0 which is an illegal input");
             }
             int modLeft = 0;
             try
             {
-                modLeft = Int32.Parse(LeftMod.Text);
+                modLeft = Int32.Parse(LeftMod.Text);//Try to convert string to int for modify left
             }
             catch
             {
-                modLeft = 0;
-            }
-            int[] leftNums = lDS.rollAll(modLeft);
-            int[] rightNums = rDS.rollAll(modRight);
-            TextBlock[] diceRollsLeft = { result1, result2, result3, result4, result5};
-            TextBlock[] diceRollsRight = {result6, result7, result8, result9, result10 };
-            int i = 0;
-            int size = leftNums.Length;
-            foreach (TextBlock dR in diceRollsLeft)
-            {
-                if (size > i)
+                if (LeftMod.Text.Trim() == "")
                 {
-                    dR.Text = leftNums[i].ToString();
+                    modLeft = 0;
                 }
                 else
                 {
-                    dR.Text = "";
+                    errorMessage("Left Modify to delete an is illegal input");
+                    return;
+                }
+            }
+            if (modLeft < 0)
+            {
+                errorMessage("Left Modify is less than or equal to 0 which is an illegal input");
+            }
+            int[] leftNums = lDS.rollAll(modLeft);//Roll left dice set and get values in int vector
+            int[] rightNums = rDS.rollAll(modRight);//Try to convert string to int for modify right
+            TextBlock[] diceRollsLeft = { result1, result2, result3, result4, result5};//Array of text blocks that represet the left sides dice rolls displayed
+            TextBlock[] diceRollsRight = {result6, result7, result8, result9, result10 };//Array of text blocks that represet the right sides dice rolls displayed
+            int i = 0;
+            int size = leftNums.Length;
+            foreach (TextBlock dR in diceRollsLeft)//Loops through each diceRollsLeft
+            {
+                if (size > i)//Check if loop goes above size
+                {
+                    dR.Text = leftNums[i].ToString();//Get that dice value as a string and display it
+                }
+                else
+                {
+                    dR.Text = "";//Reset text block value
                 }
                 i++;
             }
             i = 0;
             size = rightNums.Length;
-            foreach (TextBlock dR in diceRollsRight)
+            foreach (TextBlock dR in diceRollsRight)//Loops through each diceRollsRight
             {
-                if (size > i)
+                if (size > i)//Check if loop goes above size
                 {
-                    dR.Text = leftNums[i].ToString();
+                    dR.Text = rightNums[i].ToString();//Get that dice value as a string and display it
                 }
                 else
                 {
-                    dR.Text = "";
+                    dR.Text = "";//Reset text block value
                 }
                 i++;
             }
-            Left.Text = lDS.getRetNum().ToString();
-            Right.Text = rDS.getRetNum().ToString();
+            Left.Text = lDS.getRetNum().ToString();//Gets the total of the left side and displays it
+            Right.Text = rDS.getRetNum().ToString();//Gets the total of the right side and displays it
+            errorMessage("");
         }
 
         private void Clear(object sender, RoutedEventArgs e)
         {
-            if(sender == RightClear)
+            if(sender == RightClear)//If button and sender match
             {
                 rDS.reset();
-                TextBlock[] diceRollsRight = { result6, result7, result8, result9, result10 };
-                foreach (TextBlock dR in diceRollsRight)
+                TextBlock[] diceRollsRight = { result6, result7, result8, result9, result10 };//Array of text blocks that represet the right sides results
+                foreach (TextBlock dR in diceRollsRight)//Loops through each diceRollsRight
                 {
-                        dR.Text = "";
+                        dR.Text = "";//Reset text block value
                 }
                 Right.Text = "";
                 RightMod.Text = "";
             }
-            else if(sender == LeftClear)
+            else if(sender == LeftClear)//If button and sender match
             {
                 lDS.reset();
                 TextBlock[] diceRollsLeft = { result1, result2, result3, result4, result5 };
-                foreach (TextBlock dR in diceRollsLeft)
+                foreach (TextBlock dR in diceRollsLeft)//Loops through each diceRollsLeft
                 {
-                    dR.Text = "";
+                    dR.Text = "";//Reset text block value
                 }
                 Left.Text = "";
                 LeftMod.Text = "";
             }
+            errorMessage("");
+        }
+        private void errorMessage(string errorMes)
+        {
+            error.Text = errorMes;
         }
     }
 }

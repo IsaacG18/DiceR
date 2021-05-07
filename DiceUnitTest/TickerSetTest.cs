@@ -5,7 +5,7 @@ using DiceR.common;
 namespace DiceUnitTest
 {
     [TestClass]
-    class TickerSetTest
+    public class TickerSetTest
     {
         [TestMethod]
         public void TSTestAddTicker()
@@ -15,16 +15,29 @@ namespace DiceUnitTest
             int num = 5;
             Ticker tick = new Ticker(4, 10);
 
-            TickerSet dS = new TickerSet(num, "Set Name");
+            TickerSet tS = new TickerSet(num, "Set Name");
 
             for (int i = 0; i < num; i++)
             {
-                if (!dS.addTicker(tick))
+                if (!tS.addTicker(tick))
                 {
                     result = false;
                 };
             }
 
+            Assert.AreEqual(expected, result);
+        }
+        [TestMethod]
+        public void TSPlayer()
+        {
+            TickerSet tS = new TickerSet(0, "Set Name");
+            tS.setPlayer("Guest", 100);
+            bool expected = true;
+            bool result = false;
+            if (tS.getUsername() == "Guest" && tS.getID() == 100)
+            {
+                result = true;
+            }
             Assert.AreEqual(expected, result);
         }
         [TestMethod]

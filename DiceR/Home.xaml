@@ -8,7 +8,7 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
     <Page.Resources>
-
+        
         <Style x:Key="Title" TargetType="TextBlock">
             <Setter Property="FontFamily" Value="Segoe UI"/>
             <Setter Property="FontSize" Value="100"/>
@@ -26,6 +26,41 @@
         </Style>
     </Page.Resources>
     <Grid>
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup>
+                <VisualState x:Name="Narrow">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="0"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="Header.(Grid.ColumnSpan)" Value="3"/>
+                        <Setter Target="Header.(Grid.Row)" Value="1"/>
+                        <Setter Target="Header.(Grid.Column)" Value="0"/>
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="compact">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="600"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="Header.(Grid.ColumnSpan)" Value="1"/>
+                        <Setter Target="Header.(Grid.Row)" Value="1"/>
+                        <Setter Target="Header.(Grid.Column)" Value="1"/>
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="wide">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="1200"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="Header.(Grid.ColumnSpan)" Value="1"/>
+                        <Setter Target="Header.(Grid.Row)" Value="1"/>
+                        <Setter Target="Header.(Grid.Column)" Value="1"/>
+                        
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"/>
             <RowDefinition Height="3*"/>
@@ -37,9 +72,9 @@
             <ColumnDefinition Width="3*"/>
             <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
-        <StackPanel Grid.Column="1" Grid.Row="1" Orientation="Vertical" VerticalAlignment="Center">
+        <StackPanel x:Name="Header" Orientation="Vertical" VerticalAlignment="Center">
             <TextBlock Style="{StaticResource Title}">Dice Roll</TextBlock>
-            <TextBlock TextAlignment="Left" FontSize="50">By Isaac Gilbert</TextBlock>
+            <TextBlock TextAlignment="Left" FontSize="50" SelectionChanged="TextBlock_SelectionChanged">By Isaac Gilbert</TextBlock>
         </StackPanel>
         <StackPanel Grid.Column="1" Grid.Row="2" Orientation="Vertical" VerticalAlignment="Center">
             <TextBlock Name ="DemoDie" TextAlignment="Center" FontSize="100"></TextBlock>

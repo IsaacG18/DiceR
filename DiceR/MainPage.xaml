@@ -31,7 +31,7 @@
                         Grid.Row="0"
                         Grid.RowSpan="4">
             <NavigationView.MenuItems>
-                <NavigationViewItem Tag="home" Icon="Home" Content="Home"/>
+                <NavigationViewItem Tag="Home" Icon="Home" Content="Home"/>
                 <NavigationViewItemSeparator/>
                 <NavigationViewItemHeader x:Name="MainPagesHeader"
                                           Content="Main pages"/>
@@ -43,8 +43,13 @@
                 </NavigationViewItem>
                 <NavigationViewItem Tag="Ticker" Content="Ticker">
                     <NavigationViewItem.Icon>
-                        <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE77B;"/>
+                        <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE815;"/>
                     </NavigationViewItem.Icon>
+                </NavigationViewItem>
+                <NavigationViewItem Tag="Game" Content="Game">
+                <NavigationViewItem.Icon>
+                    <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE7FC;"/>
+                </NavigationViewItem.Icon>
                 </NavigationViewItem>
             </NavigationView.MenuItems>
             <ScrollViewer>

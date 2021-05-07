@@ -12,6 +12,7 @@ namespace DiceR.common
         private Ticker[] tSet;
         private Ticker retTicker;
 
+        //TickerSet CTOR, it inisalizes max and name
         public TickerSet(int count, string sName)
         {
             max = count;
@@ -19,14 +20,15 @@ namespace DiceR.common
             tSet = new Ticker[count];
             setName(sName);
         }
-       
+        //Returns retTicker
         public Ticker tick()
         {
             return retTicker;
         }
+        //Adds a new Ticker and returns true if added
         public bool addTicker(Ticker t)
         {
-            if (isFull())
+            if (isFull())//Check if has tSet is full
             {
                 return false;
             }
@@ -34,27 +36,27 @@ namespace DiceR.common
             amount++;
             return true;
         }
+        //Adds until the tSet is full
         public bool addFull(Ticker t)
         {
-            while (!isFull())
-            {
-                addTicker(t);
-            }
+            while (addTicker(t));//Loop until addTicker returns false
+
             return true;
         }
+        //Deletes a Ticker based on its number
         public bool deleteTicker(int num)
         {
-            if (isEmpty())
+            if (isEmpty())//Checks if tSet is empty
             {
                 return false;
             }
-            for (int i = 0; i < amount; i++)
+            for (int i = 0; i < amount; i++)//Loops though each set tSet
             {
-                if (tSet[i].getNumber() == num)
+                if (tSet[i].getNumber() == num)//Checks if number matches arguement
                 {
                     Ticker[] temp = tSet;
                     amount--;
-                    for (int j = i; j < amount; j++)
+                    for (int j = i; j < amount; j++)//Saves over deleted value with a loop
                     {
                         tSet[j] = temp[j + 1];
                     }
@@ -63,10 +65,10 @@ namespace DiceR.common
             }
             return false;
         }
-        
+        //Get ticker based on postion
         public bool getTicker(int num)
         {
-            if (amount <= num)
+            if (amount <= num)//Check if number is greater the postion
             {
                 return false;
             }

@@ -123,6 +123,7 @@
     <Compile Include="Class1.cs" />
     <Compile Include="common\dice.cs" />
     <Compile Include="common\DiceSet.cs" />
+    <Compile Include="common\Player.cs" />
     <Compile Include="common\Set.cs" />
     <Compile Include="common\Ticker.cs" />
     <Compile Include="common\TickerSet.cs" />
@@ -132,7 +133,16 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
-      <Version>6.2.10</Version>
+      <Version>6.2.12</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Toolkit.Uwp">
+      <Version>7.0.1</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Toolkit.Uwp.UI">
+      <Version>7.0.1</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Toolkit.Uwp.UI.Controls">
+      <Version>7.0.1</Version>
     </PackageReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">

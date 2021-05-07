@@ -18,9 +18,6 @@ using DiceR.common;
 
 namespace DiceR
 {
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
     public sealed partial class Home : Page
     {
         public Home()
@@ -31,7 +28,12 @@ namespace DiceR
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             dice die = new dice(6);
-            DemoDie.Text = die.rollDice().ToString();
+            DemoDie.Text = die.rollDice().ToString();//Rolls the dice and then displays the result
+        }
+
+        private void TextBlock_SelectionChanged(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

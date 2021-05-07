@@ -8,27 +8,40 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
     <Page.Resources>
+        <Style TargetType="TextBlock" x:Key="num">
+            <Setter Property="FontFamily" Value="Segoe UI"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="Foreground" Value="Black"/>
+        </Style>
         <Style TargetType="TextBlock" x:Key="SideText">
             <Setter Property="FontFamily" Value="Segoe UI"/>
             <Setter Property="FontSize" Value="25"/>
             <Setter Property="Margin" Value="5"/>
             <Setter Property="Foreground" Value="Black"/>
         </Style>
+        <Style TargetType="TextBlock" x:Key="Totals">
+            <Setter Property="FontFamily" Value="Segoe UI"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="FontSize" Value="45"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="Margin" Value="10"/>
+        </Style>
         <Style TargetType="Button" x:Key="MemoryButton">
             <Setter Property="FontFamily" Value="Segoe UI"/>
             <Setter Property="HorizontalAlignment" Value="Center"/>
-            <Setter Property="FontSize" Value="10"/>
+            <Setter Property="FontSize" Value="8"/>
             <Setter Property="Background" Value="Red"/>
-            <Setter Property="Width" Value="100"/>
+            <Setter Property="Width" Value="60"/>
             <Setter Property="Foreground" Value="white"/>
             <Setter Property="Margin" Value="50 0 0 0"/>
         </Style>
         <Style TargetType="Button">
             <Setter Property="FontFamily" Value="Segoe UI"/>
             <Setter Property="HorizontalAlignment" Value="Center"/>
-            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="FontSize" Value="15"/>
             <Setter Property="Background" Value="Red"/>
-            <Setter Property="Width" Value="70"/>
+            <Setter Property="Width" Value="60"/>
             <Setter Property="Foreground" Value="white"/>
             <Setter Property="Margin" Value="5"/>
         </Style>
@@ -36,16 +49,16 @@
         <Style TargetType="TextBox">
             <Setter Property="FontFamily" Value="Segoe UI"/>
             <Setter Property="FontSize" Value="15"/>
-            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Margin" Value="3"/>
             <Setter Property="Foreground" Value="Black"/>
             <Setter Property="Background" Value="White"/>
         </Style>
         <Style TargetType="TextBlock">
             <Setter Property="FontFamily" Value="Segoe UI"/>
             <Setter Property="HorizontalAlignment" Value="Center"/>
-            <Setter Property="FontSize" Value="40"/>
+            <Setter Property="FontSize" Value="30"/>
             <Setter Property="Foreground" Value="Black"/>
-            <Setter Property="Margin" Value="15"/>
+            <Setter Property="Margin" Value="8"/>
         </Style>
         <Style TargetType="CheckBox">
             <Setter Property="FontFamily" Value="Segoe UI"/>
@@ -68,6 +81,12 @@
         </Grid.ColumnDefinitions>
         <Border Grid.Row ="0" Grid.Column="9" Grid.RowSpan="4" Background="Azure"/>
         <Border Grid.Row ="0" Grid.Column="0" Grid.RowSpan="4" Background="Azure"/>
+        <StackPanel
+            Grid.Column="1" 
+            Grid.ColumnSpan="3" 
+            Grid.Row="0" >
+            <TextBlock x:Name="error"  Style="{StaticResource num}"></TextBlock>
+        </StackPanel>
         <StackPanel
             x:Name="right"
             Grid.Column="9" 
@@ -93,7 +112,7 @@
                 
             </StackPanel>
             
-            <TextBlock Text="Modfiy" Style="{StaticResource SideText}"></TextBlock>
+            <TextBlock Text="Modify" Style="{StaticResource SideText}"></TextBlock>
             <TextBox x:Name="RightMod"></TextBox>
             <Button Content="Clear" Click="Clear" x:Name="RightClear"></Button>
         </StackPanel>
@@ -103,7 +122,7 @@
         <TextBlock
             Text="Right">
         </TextBlock>
-        <TextBlock
+        <TextBlock  Style="{StaticResource Totals}"
             x:Name="Right">
         </TextBlock>
         </StackPanel>
@@ -119,7 +138,7 @@
             <TextBlock
                 Text="Left">
             </TextBlock>
-            <TextBlock
+            <TextBlock Style="{StaticResource Totals}"
                 x:Name="Left">
             </TextBlock>
         </StackPanel>
@@ -146,15 +165,15 @@
                     <Button Content="D20" Click="addDice" x:Name="LD20"></Button>
                 </StackPanel>
             </StackPanel>
-            <TextBlock Text="Modfiy" Style="{StaticResource SideText}"></TextBlock>
+            <TextBlock Text="Modify" Style="{StaticResource SideText}"></TextBlock>
             <TextBox x:Name="LeftMod"></TextBox>
             <Button Content="Clear" Click="Clear" x:Name="LeftClear"></Button>
 
         </StackPanel>
         <StackPanel
             Grid.Column="1" 
-            Grid.RowSpan="2" 
-            Grid.Row="2" 
+            Grid.RowSpan="3" 
+            Grid.Row="1" 
             Orientation="Vertical" 
             VerticalAlignment="Center">
             <TextBlock x:Name="result1"></TextBlock>
@@ -165,8 +184,8 @@
         </StackPanel>
         <StackPanel
             Grid.Column="3" 
-            Grid.RowSpan="2" 
-            Grid.Row="2"
+            Grid.RowSpan="3" 
+            Grid.Row="1"
             Orientation="Vertical" 
             VerticalAlignment="Center">
             <TextBlock x:Name="result6"></TextBlock>

@@ -3,12 +3,203 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:DiceR"
+    xmlns:extensions="using:Microsoft.Toolkit.Uwp.UI.Extensions"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-
+    
+    <Page.Resources>
+        <Style TargetType="TextBlock" x:Key="num">
+            <Setter Property="FontFamily" Value="Segoe UI"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="Foreground" Value="Black"/>
+        </Style>
+        <Style TargetType="TextBlock">
+            <Setter Property="FontFamily" Value="Segoe UI"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="FontSize" Value="30"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="Margin" Value="5"/>
+        </Style>
+        <Style TargetType="TextBox">
+            <Setter Property="FontFamily" Value="Segoe UI"/>
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="Width" Value="150"/>
+        </Style>
+        <Style TargetType="Button">
+            <Setter Property="FontFamily" Value="Segoe UI"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="FontSize" Value="25"/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Background" Value="Red"/>
+            <Setter Property="Width" Value="50"/>
+            <Setter Property="Foreground" Value="white"/>
+        </Style>
+        <Style TargetType="Button" x:Key="rules">
+            <Setter Property="FontFamily" Value="Segoe UI"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="FontSize" Value="25"/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Background" Value="Red"/>
+            <Setter Property="Width" Value="100"/>
+            <Setter Property="Foreground" Value="white"/>
+        </Style>
+    </Page.Resources>
     <Grid>
-
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup>
+                <VisualState x:Name="Narrow">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="0"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="Top.(Grid.Column)" Value="0"/>
+                        <Setter Target="Top.(Grid.ColumnSpan)" Value="4"/>
+                        <Setter Target="LeftPlayerSP.(Grid.Column)" Value="0"/>
+                        <Setter Target="LeftPlayerSP.(Grid.ColumnSpan)" Value="4"/>
+                        <Setter Target="RightPlayerSP.(Grid.Column)" Value="0"/>
+                        <Setter Target="RightPlayerSP.(Grid.ColumnSpan)" Value="4"/>
+                        <Setter Target="RightPlayerSP.(Grid.Row)" Value="2"/>
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="compact">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="600"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="Top.(Grid.Column)" Value="0"/>
+                        <Setter Target="Top.(Grid.ColumnSpan)" Value="3"/>
+                        <Setter Target="LeftPlayerSP.(Grid.Column)" Value="0"/>
+                        <Setter Target="LeftPlayerSP.(Grid.ColumnSpan)" Value="2"/>
+                        <Setter Target="RightPlayerSP.(Grid.Column)" Value="2"/>
+                        <Setter Target="RightPlayerSP.(Grid.ColumnSpan)" Value="2"/>
+                        <Setter Target="RightPlayerSP.(Grid.Row)" Value="1"/>
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="wide">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="1200"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="Top.(Grid.Column)" Value="1"/>
+                        <Setter Target="Top.(Grid.ColumnSpan)" Value="2"/>
+                        <Setter Target="LeftPlayerSP.(Grid.Column)" Value="0"/>
+                        <Setter Target="LeftPlayerSP.(Grid.ColumnSpan)" Value="2"/>
+                        <Setter Target="RightPlayerSP.(Grid.Column)" Value="2"/>
+                        <Setter Target="RightPlayerSP.(Grid.ColumnSpan)" Value="2"/>
+                        <Setter Target="RightPlayerSP.(Grid.Row)" Value="1"/>
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="3*"/>
+            <RowDefinition Height="3*"/>
+            <RowDefinition Height="3*"/>
+            <RowDefinition Height="3*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="2*"/>
+        </Grid.ColumnDefinitions>
+        
+                <StackPanel
+            x:Name="Top"
+            Grid.Row="0"
+            Grid.RowSpan="1"
+            Orientation="Horizontal" 
+            VerticalAlignment="Center">
+            <StackPanel  Orientation="Vertical" >
+                <TextBlock Text="Dice Size"></TextBlock>
+                <TextBox  x:Name="Size"/>
+            </StackPanel>
+            <StackPanel>
+                <TextBlock Text="Dice Count"></TextBlock>
+                <StackPanel Orientation="Horizontal" >
+                    <Button Content="2" Click="addSet" x:Name="two"></Button>
+                    <Button Content="3" Click="addSet" x:Name="three"></Button>
+                    <Button Content="4" Click="addSet" x:Name="four"></Button>
+                    <Button Content="5" Click="addSet" x:Name="five"></Button>
+                    <Button Content="6" Click="addSet" x:Name="six"></Button>
+                </StackPanel>
+            </StackPanel>
+        </StackPanel>
+        <StackPanel 
+            x:Name="LeftPlayerSP"
+            Grid.RowSpan="1" 
+            Grid.Row="1" 
+            Orientation="Vertical" 
+            VerticalAlignment="Center">
+                <TextBlock x:Name="LeftPlayer">Left Player</TextBlock>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock>Rolls:</TextBlock>
+                    <TextBlock x:Name="result1"></TextBlock>
+                    <TextBlock x:Name="result2"></TextBlock>
+                    <TextBlock x:Name="result3"></TextBlock>
+                    <TextBlock x:Name="result4"></TextBlock>
+                    <TextBlock x:Name="result5"></TextBlock>
+                    <TextBlock x:Name="result6"></TextBlock>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock>Saved:</TextBlock>
+                    <TextBlock x:Name="saved1"></TextBlock>
+                    <TextBlock x:Name="saved2"></TextBlock>
+                    <TextBlock x:Name="saved3"></TextBlock>
+                    <TextBlock x:Name="saved4"></TextBlock>
+                    <TextBlock x:Name="saved5"></TextBlock>
+                    <TextBlock x:Name="saved6"></TextBlock>
+                </StackPanel>
+        </StackPanel>
+        <StackPanel 
+            x:Name="RightPlayerSP"
+            Grid.RowSpan="1"
+            Orientation="Vertical" 
+            VerticalAlignment="Center">
+            <TextBlock x:Name="RightPlayer">Right Player</TextBlock>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock>Rolls:</TextBlock>
+                <TextBlock x:Name="result7"></TextBlock>
+                <TextBlock x:Name="result8"></TextBlock>
+                <TextBlock x:Name="result9"></TextBlock>
+                <TextBlock x:Name="result10"></TextBlock>
+                <TextBlock x:Name="result11"></TextBlock>
+                <TextBlock x:Name="result12"></TextBlock>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock>Saved:</TextBlock>
+                <TextBlock x:Name="saved7"></TextBlock>
+                <TextBlock x:Name="saved8"></TextBlock>
+                <TextBlock x:Name="saved9"></TextBlock>
+                <TextBlock x:Name="saved10"></TextBlock>
+                <TextBlock x:Name="saved11"></TextBlock>
+                <TextBlock x:Name="saved12"></TextBlock>
+            </StackPanel>
+        </StackPanel>
+        <StackPanel Grid.Row="3" Grid.RowSpan="1" Grid.Column="0" Grid.ColumnSpan="4">
+            <StackPanel>
+                <TextBlock x:Name="error"  Style="{StaticResource num}"></TextBlock>
+            </StackPanel>
+            <Button Content="Control" Click="GetRules" Style="{StaticResource rules}"/>
+            <Popup x:Name="rulesPopUp" IsOpen="False" Width="500" Height="500" IsLightDismissEnabled="True">
+                <StackPanel>
+                    
+                        <TextBlock Style="{StaticResource num}" Text="Controls:"></TextBlock>
+                        <TextBlock Style="{StaticResource num}" Text="Roll Dice: Enter"></TextBlock>
+                        <TextBlock Style="{StaticResource num}" Text="Left Player Save: 1 2 3 4 5 6"/>
+                        <TextBlock Style="{StaticResource num}" Text="Left Player Delete: 7"/>
+                        <TextBlock Style="{StaticResource num}" Text="Right Player Save: b n m , . /"/>
+                        <TextBlock Style="{StaticResource num}" Text="Right Player Delete: v"/>
+                        <TextBlock Style="{StaticResource num}" Text="Aim: To get all the values to be the same non-zero number"/>
+                </StackPanel>
+            </Popup>
+        </StackPanel>
+        
     </Grid>
-</Page>
+</Page> 

@@ -8,6 +8,19 @@ namespace DiceUnitTest
     public class UnitTest1
     {
         [TestMethod]
+        public void DSPlayer()
+        {
+            DiceSet dS = new DiceSet(0, "Set Name");
+            dS.setPlayer("Guest", 100);
+            bool expected = true;
+            bool result = false;
+            if (dS.getUsername() == "Guest" && dS.getID() == 100)
+            {
+                result = true;
+            }
+            Assert.AreEqual(expected, result);
+        }
+        [TestMethod]
         public void DSTestAddDice()
         {
             bool expected = true;
@@ -313,7 +326,7 @@ namespace DiceUnitTest
 
             dS.getAndDeleteDice(4, "size", false);
 
-            int result = dS.returnDice().getSize(); ;
+            int result = dS.returnDice().getMaxSize(); ;
             
 
            
@@ -346,5 +359,6 @@ namespace DiceUnitTest
 
             Assert.AreEqual(expected, result);
         }
+
     }
 }

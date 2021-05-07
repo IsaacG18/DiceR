@@ -33,6 +33,7 @@ namespace DiceR
             ("Home", typeof(Home)),
             ("Solo", typeof(Solo)),
             ("Ticker", typeof(Ticker)),
+            ("Game", typeof(Game)),
 
         };
 
@@ -44,9 +45,9 @@ namespace DiceR
             {
                 Content = "Versus",
                 Icon = new SymbolIcon((Symbol)0xF1AD),
-                Tag = "versus"
+                Tag = "Versus"
             });
-            _pages.Add(("versus", typeof(Versus)));
+            _pages.Add(("Versus", typeof(Versus)));
 
             // Add handler for ContentFrame navigation.
             ContentFrame.Navigated += On_Navigated;
@@ -163,7 +164,7 @@ namespace DiceR
             {
                 // SettingsItem is not part of NavView.MenuItems, and doesn't have a Tag.
                 NavView.SelectedItem = (NavigationViewItem)NavView.SettingsItem;
-                NavView.Header = "home";
+                NavView.Header = "Home";
             }
             else if (ContentFrame.SourcePageType != null)
             {

@@ -10,11 +10,13 @@ namespace DiceR.common
     {
         protected int number;
         protected int maxNum;
+        //Gets and returns Number
         public int getNumber()
         {
             return number;
         }
-        public int getSize()
+        //Gets and returns maxNum
+        public int getMaxSize()
         {
             return maxNum;
         }
